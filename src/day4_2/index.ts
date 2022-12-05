@@ -3,17 +3,17 @@ import assert from "assert";
 import path from "path";
 
 function getOverlappingPairs(pairs: [string, string][]): number {
-  const overlappingPairs = pairs.filter(([sections1, sections2]) => {
-    const minmax1 = sections1.split("-").map(Number);
-    const minmax2 = sections2.split("-").map(Number);
+  const overlappingPairs = pairs.filter((ranges) => {
+    const range1 = ranges[0].split("-").map(Number);
+    const range2 = ranges[1].split("-").map(Number);
 
     // First section range overlaps second section range completely
-    if (minmax1[0] <= minmax2[1] && minmax1[1] >= minmax2[0]) {
+    if (range1[0] <= range2[1] && range1[1] >= range2[0]) {
       return true;
     }
 
     // Second section range overlaps first section range completely
-    if (minmax2[1] <= minmax1[0] && minmax2[0] >= minmax1[1]) {
+    if (range2[1] <= range1[0] && range2[0] >= range1[1]) {
       return true;
     }
 
